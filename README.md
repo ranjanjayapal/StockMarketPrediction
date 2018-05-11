@@ -29,10 +29,12 @@ Angular:
 Click on the `Clone or Download Repository` button and either download a `zip` or copy the link
 
 **If you copied the link:**
+
 Go to Terminal or command prompt and type
 * git clone `[Paste the link here]`
 
 **If you downloaded the zip**
+
 There is nothing more to do. So go to the next step
 
 ### Install Dependencies
@@ -52,7 +54,7 @@ In this case we are using mongoDB as a local database
 * Type `mongod`
 
 
-**App is now running on `localhost:3000`
+**App is now running on `localhost:3000`**
 
 ## Further help
 
