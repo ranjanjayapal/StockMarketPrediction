@@ -1,26 +1,58 @@
-# FrontEnd
+# StockMarketPrediction
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
-## Development server
+## Steps to run project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Download and Install Node.js
+* Go to [Node.js](https://nodejs.org/en/download/)
 
-## Code scaffolding
+### Make sure Node is installed successfully
+* Open Terminal or command prompt and type `node --version`
+Should return back something like this
+`v8.6.0`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Install Angular
+* Go to [Install Angular-CLI](https://cli.angular.io/)
 
-## Build
+### Make sure Angular is installed successfully
+* Open Terminal or command prompt and type `ng --version`
+Should return back something like this
+```
+Angular CLI: 1.7.3
+Node: 8.6.0
+OS: darwin x64
+Angular:
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Download the repo
+Click on the `Clone or Download Repository` button and either download a `zip` or copy the link
 
-## Running unit tests
+**If you copied the link:**
+Go to Terminal or command prompt and type
+* git clone `[Paste the link here]`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**If you downloaded the zip**
+There is nothing more to do. So go to the next step
 
-## Running end-to-end tests
+### Install Dependencies
+* Open Terminal or command prompt
+* cd to the path of the downloaded repo
+* Type `npm install`
+ * This will install all the dependencies inside of `package.json` for you
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Run Server
+* Type `npm start`
+ * This will start the project by running `ng build` and `node server` for you
+
+### Run localDB
+In this case we are using mongoDB as a local database
+* Open a new terminal or command prompt
+* cd to the path of the downloaded repo
+* Type `mongod`
+
+
+**App is now running on `localhost:3000`
 
 ## Further help
 
