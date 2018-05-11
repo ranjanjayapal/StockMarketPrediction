@@ -54,7 +54,7 @@ In this case we are using mongoDB as a local database
 * Type `mongod`
 
 
-**App is now running on `localhost:3000`**
+App is now running on **`localhost:3000`**
 
 ## Further help
 
