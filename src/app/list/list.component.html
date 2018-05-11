@@ -1,0 +1,114 @@
+<body class="background" [ngClass]="{'loaded': val === 1}">
+<div id="loader-wrapper">
+  <div id="loader"></div>
+  <div class="loader-section section-left"></div>
+  <div class="loader-section section-right"></div>
+</div>
+<div>
+<div class="container">
+<div class="row">
+  <div class="col-xs-5 col-sm-5 ">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="btn btn-link"><a routerLink="/">Home</a></li>
+    </ul>
+  </div>
+</div>
+<div xmlns="" xmlns="">
+  <div class="list-group">
+    <a class="list-group-item"
+       *ngFor="let company_name of company_names; let i = index"
+       (click)="show_stockprice(i)">
+      {{company_name}}
+    </a>
+  </div>
+</div>
+<p *ngIf="show_current_stock_closing_price">The current Stock Price of the company as of today is:<b> ${{show_current_stock_closing_price}}</b></p>
+<p *ngIf="show_current_stock_opening_price"><b>Open:</b> {{show_current_stock_opening_price}}</p>
+<p *ngIf="show_current_stock_highest_price"><b>High:</b> {{show_current_stock_highest_price}}</p>
+<p *ngIf="show_current_stock_lowest_price"><b>Low:</b> {{show_current_stock_lowest_price}}</p>
+<p *ngIf="show_current_stock_closing_price"><b>Close:</b> {{show_current_stock_closing_price}}</p>
+<p *ngIf="show_current_stock_volume"><b>Volume:</b> {{show_current_stock_volume}}</p>
+
+<div class="col-sm-11" *ngIf="clicked_company_name">
+  <h4>Daily Graph: </h4>
+  <div [chart]="chart"></div>
+</div>
+</div>
+<div class="container" style="margin-bottom: 25%">
+    <div *ngIf="clicked_company_name" class="col-sm-3" style=" margin-bottom: 5%; margin-top: 5%">
+      <p><b> Predict on </b></p>
+      <div class="dropdown" dropdown [dropdownToggle]="false">
+        <button class="btn btn-primary" dropdown-open>{{prediction_for}}</button>
+        <ul class="dropdown-menu">
+          <li><a (click)="prediction_for='Years'">Years</a></li>
+          <li><a (click)="showModal()">Months</a></li>
+        </ul>
+      </div>
+    </div>
+  <div *ngIf="prediction_for == 'Years'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
+    <p><b>Years to predict for:</b></p>
+    <div class="dropdown" dropdown [dropdownToggle]="false">
+      <button class="btn btn-primary" dropdown-open>{{noYears}}</button>
+      <ul class="dropdown-menu">
+        <li><a (click)="noYears=1">1</a></li>
+        <li><a (click)="noYears=2">2</a></li>
+        <li><a (click)="noYears=3">3</a></li>
+        <li><a (click)="noYears=4">4</a></li>
+        <li><a (click)="noYears=5">5</a></li>
+        <li><a (click)="noYears=6">6</a></li>
+        <li><a (click)="noYears=7">7</a></li>
+        <li><a (click)="noYears=8">8</a></li>
+        <li><a (click)="noYears=9">9</a></li>
+        <li><a (click)="noYears=10">10</a></li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="prediction_for == 'Months'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
+    <p><b>No of months that needs to be predicted for:</b></p>
+    <div class="dropdown" dropdown [dropdownToggle]="false">
+      <button class="btn btn-primary" dropdown-open>{{noMonths}}</button>
+      <ul class="dropdown-menu">
+        <li><a (click)="noMonths=1">1</a></li>
+        <li><a (click)="noMonths=2">2</a></li>
+        <li><a (click)="noMonths=3">3</a></li>
+        <li><a (click)="noMonths=4">4</a></li>
+        <li><a (click)="noMonths=5">5</a></li>
+        <li><a (click)="noMonths=6">6</a></li>
+        <li><a (click)="noMonths=7">7</a></li>
+        <li><a (click)="noMonths=8">8</a></li>
+        <li><a (click)="noMonths=9">9</a></li>
+        <li><a (click)="noMonths=10">10</a></li>
+        <li><a (click)="noMonths=11">11</a></li>
+        <li><a (click)="noMonths=12">12</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-sm-3" style="margin-bottom: 15%; margin-top: 7.5%">
+    <button *ngIf="noYears != 0 || noMonths != 0" class="btn btn-success" routerLink="/prediction" (click)="pass_data_prediction()">Predict The Future</button>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="future-enhancement" tabindex="-1" role="dialog" aria-labelledby="future-enhancement-center-title" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="future-enhancement-title">Feature closed for future enhancement</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Stock Markets are very volatile. Predicting stocks a few year(s) ahead is a task that can and has been achieved.</h5>
+        <h5>But predicting a few months ahead is too short a time, and is a challenging task even data scientists face.</h5>
+        <h5>Predicting using existing ML models would give data that is very unreliable.</h5>
+        <h5>Hence this feature will be released in a future update once I work on different machine learning and deep learning models to predict in months.</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="future-enhancement-okButton" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Modal -->
+</div>
+</body>

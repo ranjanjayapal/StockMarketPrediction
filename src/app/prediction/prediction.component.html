@@ -1,0 +1,27 @@
+<body class="background" [ngClass]="{'loaded': val === 1}">
+<div id="loader-wrapper">
+  <div id="loader"></div>
+  <div class="loader-section section-left"></div>
+  <div class="loader-section section-right"></div>
+</div>
+<div class="container">
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8  ">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="btn btn-link"><a routerLink="/">Home</a></li>
+      <li role="presentation" class="btn btn-link"><a routerLink="/list">List</a></li>
+    </ul>
+  </div>
+</div>
+<h3>
+  Prediction for {{companyName}}!
+</h3>
+<h4 style="margin-top: 10%">
+  Closing Value Last Seen is <span><b>${{closingValue}}</b></span>
+</h4>
+<h4 style="margin-top: 10%">
+  Stock Price of <b>{{companyCode}}</b> in <b>{{predictedYear}}</b> will be <span><b>${{predictedValue}}</b></span>
+</h4>
+<div class="col-sm-11 line-chart" [chart]="highchart"></div>
+</div>
+</body>

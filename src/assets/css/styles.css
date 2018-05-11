@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+html{
+  min-height: 100%;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: green;
+  shape-rendering: crispEdges;
+}
+
+.axis-title {
+  fill: none;
+  stroke: green;
+  stroke-width: 0.5px;
+}
+
+.line {
+  fill: none;
+  stroke: darkgreen;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+body {
+  background: #CDE1E0;
+}

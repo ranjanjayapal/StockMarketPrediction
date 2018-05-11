@@ -1,0 +1,62 @@
+<div class="container background">
+  <div class="header">
+    <img class="inline" src="../../assets/favicon.png" width="45" height="45" alt="">
+    <a class="inline a-font" href="/">
+      Stock Market Prediction - ML
+    </a>
+  </div>
+  <h2 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Welcome to the Stock Market Prediction GUI</h2>
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    This is a webapp that has been built using MEAN stack, meaning it uses MongoDB for the database, Express Node Server,
+    Angular 4 for the front end and NodeJS for the back end.
+  </p>
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    I am using an API called quandl that gives recent stock dataset that we can work on.
+    An interactive chart is shown for users to compare between companies and play around with the dataset.
+    Regression techniques are used with the help of a library called ml-regression to predict the future of a company.
+  </p>
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <b>Note: </b> This app predicts only for future years. Short term prediction like months will be for future enhancement.
+  </p>
+
+  <h3 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Directions</h3>
+  <b class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Step 1: Add Companies</b>
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Enter a <b>stock symbol</b> in the input under add companies. It is important to add the stock symbol of a company and not the company name.</p>
+  <b class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Step 2: Investment Limit</b>
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Enter an investment limit that you are comfortable with and the app will search for all the companies whose prices are below your limit for you to predict.</p>
+
+  <h4 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> LET'S BEGIN </h4>
+
+  <!-- Modal -->
+  <div class="modal fade" id="stockSymbolValidity" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLongTitle">Symbol Error</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>This stock symbol is invalid.</h4>
+          <h5>Please check the symbol you want to search for and enter.</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cool</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Modal -->
+
+  <p style="font-weight: bold" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Add Company: </p>
+  <div class="row">
+    <input name="getCompanySymbol" class="form-control col-lg-12 col-sm-offset-2" id="symbol" style="display: block; width: 200px" type="text" [(ngModel)]="searchName" required>
+    <button class="btn btn-success searchCompany-button col-lg-2 col-md-offset-1" style="display: inline-block" (click)="getCompanySymbol()">Add</button>
+  </div>
+  <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Investment Limit: </p>
+  <div class="row" style="margin-top: 20px;">
+    <input name="investment_limit" class="form-control col-lg-12 col-sm-offset-2" id="investment-limit" style="display: block; width: 200px;" type="number" [(ngModel)]="investment_limit" required>
+    <button class="btn btn-success col-lg-2 col-md-offset-1" style="display: inline-block" routerLink="/list" (click)="onSave()">Use this as limit</button>
+  </div>
+</div>
