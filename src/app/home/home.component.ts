@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   constructor(private serverService: ServerService, private router: Router, private toastr: ToastrService) {
     const that = this;
     setTimeout(function() {
-      console.log(that.val);
       that.val = 1;
     }, 2000);
   }
@@ -26,20 +25,16 @@ export class HomeComponent implements OnInit {
   message: any;
   disable_button = false;
   checkValidity = false;
+
   ngOnInit() {
     this.serverService.currentMessage.subscribe(message => {this.message = message;
       console.log(message); });
   }
   getCompanySymbol() {
-
-    console.log('Company to search for: ' + this.searchName);
     this.serverService.searchCompanySymbol(this.searchName).subscribe(
       (response) => {
-        console.log(response.json());
-        if (response.json().validity === 'valid' && response.json().type === 'insert') {
-          this.toastr.success('Database updated with new record', 'Added to DB!!');
-        } else if (response.json().validity === 'valid' && response.json().type === 'update') {
-          this.toastr.success('Updated an existing record in Database', 'Updated DB!!');
+        if (response.json().validity === 'valid' && response.json().type === 'insert/update') {
+          this.toastr.success('Database updated', 'Added to DB!!');
         } else if (response.json().validity === 'invalid') {
           $('#stockSymbolValidity').modal('show');
         } else if (response.json().validity === 'noData') {
@@ -50,10 +45,8 @@ export class HomeComponent implements OnInit {
     );
   }
   onSave() {
-    console.log('Inside Investment Limit Button');
     this.serverService.searchCompanies(this.investment_limit).subscribe(
       (response) => {
-        console.log(response.json());
         this.serverService.changeMessage(response.json());
       },
       (error) => console.log(error)

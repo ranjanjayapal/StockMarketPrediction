@@ -147,7 +147,7 @@ export class ListComponent implements OnInit {
     map['companyData'] = this.clicked_company_name;
     map['years'] = this.noYears;
     this.data.predictionServers(map).subscribe(
-      (response) => { console.log(response.json());
+      (response) => {
         const jsonResult = response.json();
         this.data.changePredictionMessage(jsonResult);
       },
