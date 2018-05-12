@@ -23,7 +23,6 @@ export class ServerService {
   }
   searchCompanySymbol(companyname: any) {
     const url = '/data/searchcompany/' + companyname;
-    console.log(url);
     return this.http.get(url);
   }
 }

@@ -54,9 +54,9 @@
     <input name="getCompanySymbol" class="form-control col-lg-12 col-sm-offset-2" id="symbol" style="display: block; width: 200px" type="text" [(ngModel)]="searchName" required>
     <button class="btn btn-success searchCompany-button col-lg-2 col-md-offset-1" style="display: inline-block" (click)="getCompanySymbol()">Add</button>
   </div>
-  <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Investment Limit: </p>
+  <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Avg money you are ready to spend: </p>
   <div class="row" style="margin-top: 20px;">
     <input name="investment_limit" class="form-control col-lg-12 col-sm-offset-2" id="investment-limit" style="display: block; width: 200px;" type="number" [(ngModel)]="investment_limit" required>
-    <button class="btn btn-success col-lg-2 col-md-offset-1" style="display: inline-block" routerLink="/list" (click)="onSave()">Use this as limit</button>
+    <button class="btn btn-success col-lg-2 col-md-offset-1" style="display: inline-block" routerLink="/list" (click)="onSave()">Search</button>
   </div>
 </div>

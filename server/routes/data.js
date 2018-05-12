@@ -44,7 +44,7 @@ router.get('/searchcompany/:companyname', (req, res) => {
                             data = {
                                 'validity': 'valid',
                                 'dataset': dataset.dataset,
-                                'type': 'insert'
+                                'type': 'insert/update'
                             };
                             res.json(data);
                             db.close();

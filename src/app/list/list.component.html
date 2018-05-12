@@ -33,6 +33,9 @@
   <h4>Daily Graph: </h4>
   <div [chart]="chart"></div>
 </div>
+<div class="col-sm-11" *ngIf="clicked_company_name">
+  <p class="company_chosen">You have chosen <b>{{clicked_company_name}}</b></p>
+</div>
 </div>
 <div class="container" style="margin-bottom: 25%">
     <div *ngIf="clicked_company_name" class="col-sm-3" style=" margin-bottom: 5%; margin-top: 5%">
