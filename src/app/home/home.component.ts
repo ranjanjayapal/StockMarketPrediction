@@ -6,11 +6,13 @@ declare var $: any;
 import {any} from 'codelyzer/util/function';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
   public val = 0;
   constructor(private serverService: ServerService, private router: Router, private toastr: ToastrService) {
@@ -37,13 +39,14 @@ export class HomeComponent implements OnInit {
           this.toastr.success('Database updated', 'Added to DB!!');
         } else if (response.json().validity === 'invalid') {
           $('#stockSymbolValidity').modal('show');
-        } else if (response.json().validity === 'noData') {
+        } else if (response.json().validity === 'noDataRetrieved') {
           $('#stockSymbolValidity').modal('show');
         }
       },
       (error) => console.log(error)
     );
   }
+
   onSave() {
     this.serverService.searchCompanies(this.investment_limit).subscribe(
       (response) => {

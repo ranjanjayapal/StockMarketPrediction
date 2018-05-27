@@ -23,6 +23,8 @@ export class PredictionComponent implements OnInit {
   graph = '';
   companyCode = '';
   highchart: any;
+  sentimentPositives = '';
+  sentimentNegatives = '';
   constructor(private data: ServerService) {}
   ngOnInit() {
     const x_axis_ticks_fig1 = [];
@@ -35,6 +37,8 @@ export class PredictionComponent implements OnInit {
         this.predictedValue = predictionMessage['predictedValue'];
         this.predictedYear = predictionMessage['yearPredicted'];
         const dataset = predictionMessage['dataset'];
+        this.sentimentPositives = predictionMessage['sentiment-result-positives'];
+        this.sentimentNegatives = predictionMessage['sentiment-result-negatives'];
         this.companyName = dataset.name;
         this.companyCode = dataset.dataset_code;
         this.closingValue = dataset.data[dataset.data.length - 1][4];
