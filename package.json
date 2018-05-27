@@ -34,7 +34,6 @@
     "bootstrap4": "0.0.1-security",
     "brain": "^1.0.0",
     "brain.js": "^1.2.1",
-    "check-ticker-symbol": "^1.0.0",
     "core-js": "^2.4.1",
     "d3": "^4.12.2",
     "express": "^4.16.3",
@@ -52,8 +51,10 @@
     "ngx-toastr": "^6.4.1-beta.0",
     "quandl": "0.0.6",
     "rxjs": "^5.4.2",
+    "sentiment": "^5.0.0",
     "stock-symbol-lookup": "^0.2.1",
     "tickertape": "^1.0.4",
+    "twit": "^2.2.9",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

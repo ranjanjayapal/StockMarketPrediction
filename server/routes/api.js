@@ -5,6 +5,16 @@ const ObjectID = require('mongodb').ObjectID;
 
 var moment = require('moment');
 const ml = require('ml-regression');
+var Twit = require('twit');
+var Sentiment = require('sentiment');
+var sentiment = new Sentiment();
+var twitConfig = new Twit({
+    consumer_key: 'JuJc4oIHYhOCddxQTaiSINl4n',
+    consumer_secret: 'vICclvQ1LQsx494RRQBQi6lR9CbU6QruIffxwHT2s9dUsrPzzY',
+    access_token: '980655830486962177-gfOYf34T2pOv12Ww3LuxpPPc0eoOP2S',
+    access_token_secret: 'T8mSnDrdx2FddSgtuP3NPthb2V0BUBAgr8FcPdEcDssPg',
+    timeout_ms: 60*1000
+});
 
 var url = "mongodb://localhost:27017/"; 
 
@@ -86,10 +96,31 @@ router.get('/prediction', (req, res) => {
             regression = new SLR(data['dates'], data['prices']);
             var yearToPredict = parseFloat(predictYears) + parseFloat(moment().format('YYYY'));
             var predictedValue = regression.predict(parseFloat(yearToPredict));
-            res.json({
-                'dataset': data['dataset'],
-                'predictedValue': predictedValue,
-                'yearToPredict': yearToPredict
+            var companyName = predictCompanyData.split(' ');
+            twitConfig.get('search/tweets', {q: companyName[0] + ' since:2018-02-01', count: 100}, function(err, data, response) {
+                if (err) throw err;
+                return response;
+            }).then((tweets) => {
+                var tweetResults = [];
+                var positives = 0;
+                var negatives = 0;
+                for (var i = 0; i<tweets.data.statuses.length; i++) {
+                    tweetResults[i] = sentiment.analyze(tweets.data.statuses[i].text);
+                }
+                for (var i = 0; i<tweetResults.length; i++) {
+                    if (tweetResults[i].score > 0) {
+                        positives += 1;
+                    } else if (tweetResults[i].score < 0) {
+                        negatives += 1;
+                    }
+                }
+                res.json({
+                    'dataset': data['dataset'],
+                    'predictedValue': predictedValue,
+                    'yearToPredict': yearToPredict,
+                    'sentiment-result-positives': positives,
+                    'sentiment-result-negatives': negatives
+                });
             });
         });
     });
