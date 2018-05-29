@@ -131,6 +131,11 @@ h1 {
   max-width: 978px;
 }
 
-background {
-  background: #CDE1E0;
+.color {
+  color: azure;
+}
+
+.background {
+  background: #0280ad;
+  /* background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
 }

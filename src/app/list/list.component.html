@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-xs-5 col-sm-5 ">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="btn btn-link"><a routerLink="/">Home</a></li>
+      <li role="presentation" class="btn btn-link"><a class= "color" routerLink="/">Home</a></li>
     </ul>
   </div>
 </div>
@@ -22,24 +22,24 @@
     </a>
   </div>
 </div>
-<p *ngIf="show_current_stock_closing_price">The current Stock Price of the company as of today is:<b> ${{show_current_stock_closing_price}}</b></p>
-<p *ngIf="show_current_stock_opening_price"><b>Open:</b> {{show_current_stock_opening_price}}</p>
-<p *ngIf="show_current_stock_highest_price"><b>High:</b> {{show_current_stock_highest_price}}</p>
-<p *ngIf="show_current_stock_lowest_price"><b>Low:</b> {{show_current_stock_lowest_price}}</p>
-<p *ngIf="show_current_stock_closing_price"><b>Close:</b> {{show_current_stock_closing_price}}</p>
-<p *ngIf="show_current_stock_volume"><b>Volume:</b> {{show_current_stock_volume}}</p>
+<p *ngIf="show_current_stock_closing_price" class= "color">The current Stock Price of the company as of {{date}} is:<b> Rs. {{show_current_stock_closing_price}}</b></p>
+<p *ngIf="show_current_stock_opening_price" class= "color"><b>Open:</b> {{show_current_stock_opening_price}}</p>
+<p *ngIf="show_current_stock_highest_price" class= "color"><b>High:</b> {{show_current_stock_highest_price}}</p>
+<p *ngIf="show_current_stock_lowest_price" class= "color"><b>Low:</b> {{show_current_stock_lowest_price}}</p>
+<p *ngIf="show_current_stock_closing_price" class= "color"><b>Close:</b> {{show_current_stock_closing_price}}</p>
+<p *ngIf="show_current_stock_volume" class= "color"><b>Volume:</b> {{show_current_stock_volume}}</p>
 
 <div class="col-sm-11" *ngIf="clicked_company_name">
-  <h4>Daily Graph: </h4>
+  <h4 class= "color">Daily Graph: </h4>
   <div [chart]="chart"></div>
 </div>
 <div class="col-sm-11" *ngIf="clicked_company_name">
-  <p class="company_chosen">You have chosen <b>{{clicked_company_name}}</b></p>
+  <p class="company_chosen color">You have chosen <b>{{clicked_company_name}}</b></p>
 </div>
 </div>
 <div class="container" style="margin-bottom: 25%">
     <div *ngIf="clicked_company_name" class="col-sm-3" style=" margin-bottom: 5%; margin-top: 5%">
-      <p><b> Predict on </b></p>
+      <p class= "color"><b> Predict on </b></p>
       <div class="dropdown" dropdown [dropdownToggle]="false">
         <button class="btn btn-primary" dropdown-open>{{prediction_for}}</button>
         <ul class="dropdown-menu">
@@ -49,7 +49,7 @@
       </div>
     </div>
   <div *ngIf="prediction_for == 'Years'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
-    <p><b>Years to predict for:</b></p>
+    <p class= "color"><b>Years to predict for:</b></p>
     <div class="dropdown" dropdown [dropdownToggle]="false">
       <button class="btn btn-primary" dropdown-open>{{noYears}}</button>
       <ul class="dropdown-menu">
@@ -67,7 +67,7 @@
     </div>
   </div>
   <div *ngIf="prediction_for == 'Months'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
-    <p><b>No of months that needs to be predicted for:</b></p>
+    <p class= "color"><b>Months to predict for:</b></p>
     <div class="dropdown" dropdown [dropdownToggle]="false">
       <button class="btn btn-primary" dropdown-open>{{noMonths}}</button>
       <ul class="dropdown-menu">
@@ -95,19 +95,20 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="future-enhancement-title">Feature closed for future enhancement</h2>
+        <h2 class="modal-title" id="future-enhancement-title">Warning!</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <h5>Stock Markets are very volatile. Predicting stocks a few year(s) ahead is a task that can and has been achieved.</h5>
-        <h5>But predicting a few months ahead is too short a time, and is a challenging task even data scientists face.</h5>
-        <h5>Predicting using existing ML models would give data that is very unreliable.</h5>
-        <h5>Hence this feature will be released in a future update once I work on different machine learning and deep learning models to predict in months.</h5>
+        <h5>Predicting for a short-term as months is not easy.</h5>
+        <h5>It requires multiple checkes to be made to even predict it approximately.</h5>
+        <h5>Hence, the accuracy might not be as good as preidcting for years.</h5>
+        <h5>Please proceed with caution.</h5>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="future-enhancement-okButton" data-dismiss="modal">Okay</button>
+        <button type="button" class="btn btn-primary" id="future-enhancement-goBackButton" data-dismiss="modal">Go Back</button>
+        <button type="button" class="btn btn-danger" id="future-enhancement-continueButton" data-dismiss="modal" (click)="prediction_for='Months'">Continue</button>
       </div>
     </div>
   </div>

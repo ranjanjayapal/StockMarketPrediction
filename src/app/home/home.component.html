@@ -1,3 +1,9 @@
+<body [ngClass]="{'loaded': val === 1}">
+<div id="loader-wrapper" >
+  <div id="background"></div>
+  <div class="loader-section section-left"></div>
+  <div class="loader-section section-right"></div>
+</div>
 <div class="container background">
   <div class="header">
     <img class="inline" src="../../assets/favicon.png" width="45" height="45" alt="">
@@ -5,27 +11,21 @@
       Stock Market Prediction - ML
     </a>
   </div>
-  <h2 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Welcome to the Stock Market Prediction GUI</h2>
-  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+  <h2 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">Welcome to the Stock Market Prediction GUI</h2>
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">
     This is a webapp that has been built using MEAN stack, meaning it uses MongoDB for the database, Express Node Server,
     Angular 4 for the front end and NodeJS for the back end.
   </p>
-  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">
     I am using an API called quandl that gives recent stock dataset that we can work on.
     An interactive chart is shown for users to compare between companies and play around with the dataset.
     Regression techniques are used with the help of a library called ml-regression to predict the future of a company.
   </p>
-  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">
     <b>Note: </b> This app predicts only for future years. Short term prediction like months will be for future enhancement.
   </p>
 
-  <h3 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Directions</h3>
-  <b class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Step 1: Add Companies</b>
-  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Enter a <b>stock symbol</b> in the input under add companies. It is important to add the stock symbol of a company and not the company name.</p>
-  <b class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Step 2: Investment Limit</b>
-  <p class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Enter an investment limit that you are comfortable with and the app will search for all the companies whose prices are below your limit for you to predict.</p>
-
-  <h4 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> LET'S BEGIN </h4>
+  <h4 align="center" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color"> LET'S BEGIN </h4>
 
   <!-- Modal -->
   <div class="modal fade" id="stockSymbolValidity" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -49,14 +49,15 @@
   </div>
   <!-- End of Modal -->
 
-  <p style="font-weight: bold" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Add Company: </p>
+  <p style="font-weight: bold" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">Add Company: </p>
   <div class="row">
     <input name="getCompanySymbol" class="form-control col-lg-12 col-sm-offset-2" id="symbol" style="display: block; width: 200px" type="text" [(ngModel)]="searchName" required>
-    <button class="btn btn-success searchCompany-button col-lg-2 col-md-offset-1" style="display: inline-block" (click)="getCompanySymbol()">Add</button>
+    <a (click)="getCompanySymbol()"><img src="../../assets/addCompany.png" class="add-company-button col-lg-2" style="display: inline-block"/></a>
   </div>
-  <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">Avg money you are ready to spend: </p>
+  <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">Avg money you are ready to spend: </p>
   <div class="row" style="margin-top: 20px;">
     <input name="investment_limit" class="form-control col-lg-12 col-sm-offset-2" id="investment-limit" style="display: block; width: 200px;" type="number" [(ngModel)]="investment_limit" required>
-    <button class="btn btn-success col-lg-2 col-md-offset-1" style="display: inline-block" routerLink="/list" (click)="onSave()">Search</button>
+    <a routerLink="/list" (click)="onSave()"><img src="../../assets/searchIcon.png" class="search-companies-button col-lg-2" style="display: inline-block"/></a>
   </div>
 </div>
+</body>

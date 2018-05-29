@@ -36,6 +36,7 @@ export class ListComponent implements OnInit {
   noYears = 0;
   noMonths = 0;
   prediction_for = 'Choose';
+  date: any;
   private margin = {top: 20, right: 20, bottom: 30, left: 50};
   private width: number;
   private height: number;
@@ -108,6 +109,7 @@ export class ListComponent implements OnInit {
     const y_axis_ticks_fig1 = [];
     this.clicked_company_name = this.company_names[index];
     this.clickedCompanyNameIndex = index;
+    this.date = new Date().toLocaleDateString();
     for (const i of this.companyData) {
       if (this.clicked_company_name === i['name']) {
         this.show_current_stock_opening_price = i['data'][i['data'].length - 1][1];
@@ -145,7 +147,13 @@ export class ListComponent implements OnInit {
   pass_data_prediction() {
     const map = new Object();
     map['companyData'] = this.clicked_company_name;
-    map['years'] = this.noYears;
+
+    if (this.noYears !== 0) {
+      map['years'] = this.noYears;
+    } else {
+      map['months'] = this.noMonths;
+    }
+    console.log(map);
     this.data.predictionServers(map).subscribe(
       (response) => {
         const jsonResult = response.json();

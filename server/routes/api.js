@@ -62,8 +62,15 @@ router.get('/stocks/:limit', (req, res) => {
 Return the predicted value */
 router.get('/prediction', (req, res) => {
     var predictCompanyData = req.query.companydata;
-    var predictYears = req.query.years;
+    var predictYears = '';
+    var predictMonths = '';
 
+    if (req.query.years !== undefined) {
+        predictYears = req.query.years;
+    } else {
+        predictMonths = req.query.months;
+    }
+    console.log('predictMonths: ' + predictMonths);
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("stocks");
@@ -78,7 +85,11 @@ router.get('/prediction', (req, res) => {
                     if (Indstock.dataset.name === predictCompanyData) {
                         dataset = Indstock.dataset;
                         for (var i=0; i<Indstock.dataset.data.length; i++) {
-                            dates[i] = parseFloat(Indstock.dataset.data[i][0].split('-')[0]);
+                            if (predictYears !== '') {
+                                dates[i] = parseFloat(Indstock.dataset.data[i][0].split('-')[0]);
+                            } else {
+                                dates[i] = parseFloat(Indstock.dataset.data[i][0].split('-')[1]);
+                            }
                             prices[i] = parseFloat(Indstock.dataset.data[i][4]);
                         }
                     }
@@ -94,8 +105,24 @@ router.get('/prediction', (req, res) => {
             // prediction begins!
             const SLR = ml.SLR;
             regression = new SLR(data['dates'], data['prices']);
-            var yearToPredict = parseFloat(predictYears) + parseFloat(moment().format('YYYY'));
-            var predictedValue = regression.predict(parseFloat(yearToPredict));
+            var yearToPredict = '';
+            var monthToPredict = '';
+
+            if (predictYears !== '') {
+                yearToPredict = parseFloat(predictYears) + parseFloat(moment().format('YYYY'));
+            } else {
+                monthToPredict = parseFloat(predictMonths) + parseFloat(moment().format('MM'));
+            }
+            console.log('MonthToPredict: ' + monthToPredict);
+            var predictedValue = '';
+
+            if (yearToPredict !== '') {
+                predictedValue = regression.predict(parseFloat(yearToPredict));
+            } else {
+                predictedValue = regression.predict(parseFloat(monthToPredict));
+            }
+            console.log('predictedValue: ' + predictedValue);
+
             var companyName = predictCompanyData.split(' ');
             twitConfig.get('search/tweets', {q: companyName[0] + ' since:2018-02-01', count: 100}, function(err, data, response) {
                 if (err) throw err;
@@ -104,6 +131,7 @@ router.get('/prediction', (req, res) => {
                 var tweetResults = [];
                 var positives = 0;
                 var negatives = 0;
+
                 for (var i = 0; i<tweets.data.statuses.length; i++) {
                     tweetResults[i] = sentiment.analyze(tweets.data.statuses[i].text);
                 }
@@ -118,6 +146,7 @@ router.get('/prediction', (req, res) => {
                     'dataset': data['dataset'],
                     'predictedValue': predictedValue,
                     'yearToPredict': yearToPredict,
+                    'monthToPredict': monthToPredict,
                     'sentiment-result-positives': positives,
                     'sentiment-result-negatives': negatives
                 });

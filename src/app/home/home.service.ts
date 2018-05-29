@@ -19,7 +19,16 @@ export class ServerService {
     return this.http.get('/api/stocks/' + limit);
   }
   predictionServers(companyData: any) {
-    return this.http.get('/api/prediction?companydata=' + companyData['companyData'] + '&years=' + companyData['years']);
+    let query = '';
+    console.log('companyData[Years]: ' + companyData['years']);
+    console.log('companyData[Months]: ' + companyData['months']);
+    if (companyData['years'] !== undefined) {
+      query = '&years=' + companyData['years'];
+    } else {
+      query = '&months=' + companyData['months'];
+    }
+    console.log('query: ' + query);
+    return this.http.get('/api/prediction?companydata=' + companyData['companyData'] +  query);
   }
   searchCompanySymbol(companyname: any) {
     const url = '/data/searchcompany/' + companyname;

@@ -22,7 +22,7 @@ quandl.configure(options);
 */
 router.get('/searchcompany/:companyname', (req, res) => {
     companyname = req.params.companyname;
-    var result = quandl.dataset({ source: 'WIKI', table: companyname}, { order:'asc', start_date: '2010-01-01' }, function(err, response) {
+    var result = quandl.dataset({ source: 'NSE', table: companyname}, { order:'asc', start_date: '2012-01-01' }, function(err, response) {
         var dataset = JSON.parse(response);
         console.log(response);
         if(err || dataset['quandl_error'] !== undefined) {
@@ -44,7 +44,7 @@ router.get('/searchcompany/:companyname', (req, res) => {
                         data = {
                             'validity': 'valid',
                             'dataset': dataset.dataset,
-                            'type': 'insert'
+                            'type': 'insert/update'
                         };
                         res.json(data);
                         db.close();

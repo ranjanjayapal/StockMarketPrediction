@@ -6,6 +6,7 @@ import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 import * as d3Axis from 'd3-axis';
+import * as moment from 'moment';
 declare var $: any;
 import { Chart } from 'angular-highcharts';
 @Component({
@@ -18,6 +19,7 @@ export class PredictionComponent implements OnInit {
   companyName = '';
   predictedValue = '';
   predictedYear = '';
+  predictedMonth = '';
   predictedGraph = '';
   closingValue = '';
   graph = '';
@@ -35,7 +37,6 @@ export class PredictionComponent implements OnInit {
         this.val = 1;
         let chartOptions = {};
         this.predictedValue = predictionMessage['predictedValue'];
-        this.predictedYear = predictionMessage['yearPredicted'];
         const dataset = predictionMessage['dataset'];
         this.sentimentPositives = predictionMessage['sentiment-result-positives'];
         this.sentimentNegatives = predictionMessage['sentiment-result-negatives'];
@@ -43,6 +44,7 @@ export class PredictionComponent implements OnInit {
         this.companyCode = dataset.dataset_code;
         this.closingValue = dataset.data[dataset.data.length - 1][4];
         this.predictedYear = predictionMessage['yearToPredict'];
+        this.predictedMonth = predictionMessage['monthToPredict'];
         for (let j = 0; j < dataset.data.length; j++) {
           x_axis_ticks_fig1[j] = dataset.data[j][0];
           y_axis_ticks_fig1[j] = dataset.data[j][4];
@@ -50,8 +52,16 @@ export class PredictionComponent implements OnInit {
         x_axis_ticks_fig1.length = dataset.data.length + 1;
         y_axis_ticks_fig1.length = dataset.data.length + 1;
         arr_data_fig1.length = dataset.data.length + 1;
-        const yearPredictingFor = this.predictedYear.toString() + '-01-01';
-        x_axis_ticks_fig1[dataset.data.length] = yearPredictingFor;
+        let yearPredictingFor = '';
+        let monthPredictingFor = '';
+        if (this.predictedYear !== '') {
+          yearPredictingFor = this.predictedYear.toString() + '-01-01';
+          x_axis_ticks_fig1[dataset.data.length] = yearPredictingFor;
+        } else {
+          monthPredictingFor = moment().format('YYYY') + '-' + this.predictedMonth.toString() + '-01';
+          x_axis_ticks_fig1[dataset.data.length] = monthPredictingFor;
+        }
+        console.log(monthPredictingFor);
         y_axis_ticks_fig1[dataset.data.length] = this.predictedValue;
 
         for (let i = 0; i < x_axis_ticks_fig1.length; i++) {
