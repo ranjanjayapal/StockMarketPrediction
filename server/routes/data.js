@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-var cts = require('check-ticker-symbol');
 var Quandl = require("quandl");
 var quandl = new Quandl();
 
