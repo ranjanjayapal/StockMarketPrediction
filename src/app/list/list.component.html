@@ -41,7 +41,7 @@
     <div *ngIf="clicked_company_name" class="col-sm-3" style=" margin-bottom: 5%; margin-top: 5%">
       <p class= "color"><b> Predict on </b></p>
       <div class="dropdown" dropdown [dropdownToggle]="false">
-        <button class="btn btn-primary" dropdown-open>{{prediction_for}}</button>
+        <button class="btn btn-light" dropdown-open>{{prediction_for}}</button>
         <ul class="dropdown-menu">
           <li><a (click)="prediction_for='Years'">Years</a></li>
           <li><a (click)="showModal()">Months</a></li>
@@ -51,7 +51,7 @@
   <div *ngIf="prediction_for == 'Years'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
     <p class= "color"><b>Years to predict for:</b></p>
     <div class="dropdown" dropdown [dropdownToggle]="false">
-      <button class="btn btn-primary" dropdown-open>{{noYears}}</button>
+      <button class="btn btn-light" dropdown-open>{{noYears}}</button>
       <ul class="dropdown-menu">
         <li><a (click)="noYears=1">1</a></li>
         <li><a (click)="noYears=2">2</a></li>
@@ -69,7 +69,7 @@
   <div *ngIf="prediction_for == 'Months'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
     <p class= "color"><b>Months to predict for:</b></p>
     <div class="dropdown" dropdown [dropdownToggle]="false">
-      <button class="btn btn-primary" dropdown-open>{{noMonths}}</button>
+      <button class="btn btn-light" dropdown-open>{{noMonths}}</button>
       <ul class="dropdown-menu">
         <li><a (click)="noMonths=1">1</a></li>
         <li><a (click)="noMonths=2">2</a></li>
