@@ -51,9 +51,16 @@ router.get('/stocks/:limit', (req, res) => {
             });
             return companies;
         }).then((data) => {
-            res.json({
-                'companies': data
-            });
+            if (data.length === 0) {
+                res.json({
+                    'noCompanies': 'true'
+                });
+            } else {
+                res.json({
+                    'companies': data
+                });
+            }
+            
         });
     });
 });

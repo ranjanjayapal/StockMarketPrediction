@@ -50,7 +50,12 @@ export class HomeComponent implements OnInit {
   onSave() {
     this.serverService.searchCompanies(this.investment_limit).subscribe(
       (response) => {
-        this.serverService.changeMessage(response.json());
+        if (response.json()['noCompanies'] !== undefined) {
+          $('#noMoreCompanies').modal('show');
+        } else {
+          this.serverService.changeMessage(response.json());
+          this.router.navigate(['/list']);
+        }
       },
       (error) => console.log(error)
     );

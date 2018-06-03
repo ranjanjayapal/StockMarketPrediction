@@ -20,6 +20,7 @@ export class PredictionComponent implements OnInit {
   predictedValue = '';
   predictedYear = '';
   predictedMonth = '';
+  predictedMonthName = '';
   predictedGraph = '';
   closingValue = '';
   graph = '';
@@ -45,6 +46,10 @@ export class PredictionComponent implements OnInit {
         this.closingValue = dataset.data[dataset.data.length - 1][4];
         this.predictedYear = predictionMessage['yearToPredict'];
         this.predictedMonth = predictionMessage['monthToPredict'];
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        this.predictedMonthName = monthNames[parseInt(this.predictedMonth, 10) - 1];
         for (let j = 0; j < dataset.data.length; j++) {
           x_axis_ticks_fig1[j] = dataset.data[j][0];
           y_axis_ticks_fig1[j] = dataset.data[j][4];

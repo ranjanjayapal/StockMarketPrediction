@@ -20,7 +20,7 @@
   Closing Value Last Seen is <span><b>Rs. {{closingValue}}</b></span>
 </h4>
 <h4 style="margin-top: 5%" class= "color">
-  Stock Price of <b>{{companyCode}}</b> in <b>{{predictedYear}}</b> will be <span><b>Rs. {{predictedValue}}</b></span>
+  Stock Price of <b>{{companyCode}}</b> in <b *ngIf="predictedYear">{{predictedYear}}</b> <b *ngIf="predictedMonthName">{{predictedMonthName}}</b> will be <span><b>Rs. {{predictedValue}}</b></span>
 </h4>
 <div class="col-sm-11 line-chart" [chart]="highchart"></div>
 </div>

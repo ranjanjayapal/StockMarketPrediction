@@ -47,6 +47,25 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="noMoreCompanies" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLongTitle">No Companies</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>There are no companies with the price you are searching for</h4>
+          <h5>If you know any company with that price please add that into the database.</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cool</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- End of Modal -->
 
   <p style="font-weight: bold" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">Add Company: </p>
@@ -57,7 +76,7 @@
   <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">Avg money you are ready to spend: </p>
   <div class="row" style="margin-top: 20px;">
     <input name="investment_limit" class="form-control col-lg-12 col-sm-offset-2" id="investment-limit" style="display: block; width: 200px;" type="number" [(ngModel)]="investment_limit" required>
-    <a routerLink="/list" (click)="onSave()"><img src="../../assets/searchIcon.png" class="search-companies-button col-lg-2" style="display: inline-block"/></a>
+    <a (click)="onSave()"><img src="../../assets/searchIcon.png" class="search-companies-button col-lg-2" style="display: inline-block"/></a>
   </div>
 </div>
 </body>
