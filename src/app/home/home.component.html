@@ -73,6 +73,9 @@
     <input name="getCompanySymbol" class="form-control col-lg-12 col-sm-offset-2" id="symbol" style="display: block; width: 200px" type="text" [(ngModel)]="searchName" required>
     <a (click)="getCompanySymbol()"><img src="../../assets/addCompany.png" class="add-company-button col-lg-2" style="display: inline-block"/></a>
   </div>
+  <div class="row mt-2">
+    <a class="btn btn-link search-symbol col-sm-offset-2" href="https://www.nseindia.com/index_nse.htm" target="_blank" style="float: left;">+ Search Symbols</a>
+  </div>
   <p style="font-weight: bold; margin-top: 20px;" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 color">Avg money you are ready to spend: </p>
   <div class="row" style="margin-top: 20px;">
     <input name="investment_limit" class="form-control col-lg-12 col-sm-offset-2" id="investment-limit" style="display: block; width: 200px;" type="number" [(ngModel)]="investment_limit" required>
