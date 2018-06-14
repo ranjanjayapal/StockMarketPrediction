@@ -29,9 +29,21 @@
 <p *ngIf="show_current_stock_closing_price" class= "color"><b>Close:</b> {{show_current_stock_closing_price}}</p>
 <p *ngIf="show_current_stock_volume" class= "color"><b>Volume:</b> {{show_current_stock_volume}}</p>
 
-<div class="col-sm-11" *ngIf="clicked_company_name">
+<div *ngIf="clicked_company_name" class="col-sm-11 button-tabs">
+  <button class="btn btn-light daily-btn" (click)="turnDailyOn()">
+    Daily
+  </button>
+  <button class="btn btn-light volume-btn" (click)="turnVolumeOn()">
+    Volume
+  </button>
+</div>
+<div class="col-sm-11 daily-graph" *ngIf="clicked_company_name">
   <h4 class= "color">Daily Graph: </h4>
   <div [chart]="chart"></div>
+</div>
+<div class="col-sm-11 volume-graph" *ngIf="clicked_company_name">
+  <h4 class= "color">Volume Graph: </h4>
+  <div [chart]="chart1"></div>
 </div>
 <div class="col-sm-11" *ngIf="clicked_company_name">
   <p class="company_chosen color">You have chosen <b>{{clicked_company_name}}</b></p>

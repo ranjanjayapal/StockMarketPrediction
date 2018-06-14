@@ -26,6 +26,7 @@ export class ListComponent implements OnInit {
   clickedCompanyNameIndex;
   messages: any;
   chart: any;
+  chart1:any;
   company_names = [];
   show_current_stock_closing_price = '';
   show_current_stock_opening_price = '';
@@ -100,13 +101,42 @@ export class ListComponent implements OnInit {
       },
       colors: ['#f7a35c', '#2591D7', '#D72530', '#2CE762', '#CFE515']
     });
+
+    this.chart1 = new Chart({
+      chart: {
+        height: 600,
+        type: 'line',
+        zoomType: 'xy'
+      },
+      title: {
+        text: 'Volume Chart'
+      },
+      credits: {
+        enabled: false
+      },
+      xAxis: {
+        type: 'datetime',
+        title: {
+          text: 'Date'
+        }
+      },
+      yAxis: {
+        title: {
+          text: 'Volume of stock'
+        }
+      },
+      colors: ['#f7a35c', '#2591D7', '#D72530', '#2CE762', '#CFE515']
+    });
   }
 
   // Runs when one of the companies are clicked.
   show_stockprice(index) {
     const arr_data_fig1 = [];
+    const arr_data_fig2= [];
     const x_axis_ticks_fig1 = [];
     const y_axis_ticks_fig1 = [];
+    const x_axis_ticks_fig2 = [];
+    const y_axis_ticks_fig2 = [];
     this.clicked_company_name = this.company_names[index];
     this.clickedCompanyNameIndex = index;
     this.date = new Date().toLocaleDateString();
@@ -122,11 +152,18 @@ export class ListComponent implements OnInit {
           x_axis_ticks_fig1[j] = i['data'][j][0];
           y_axis_ticks_fig1[j] = i['data'][j][4];
         }
+        for (let j = 0; j < i['data'].length; j++) {
+          x_axis_ticks_fig2[j] = i['data'][j][0];
+          y_axis_ticks_fig2[j] = i['data'][j][6];
+        }
       }
     }
-
+    console.log(y_axis_ticks_fig2);
     for (let i = 0; i < x_axis_ticks_fig1.length; i++) {
       arr_data_fig1[i] = [new Date(x_axis_ticks_fig1[i]), y_axis_ticks_fig1[i]];
+    }
+    for (let i = 0; i < x_axis_ticks_fig2.length; i++) {
+      arr_data_fig2[i] = [new Date(x_axis_ticks_fig2[i]), y_axis_ticks_fig2[i]];
     }
 
     let exists = 0;
@@ -135,13 +172,35 @@ export class ListComponent implements OnInit {
         exists = 1;
       }
     }
+    for (let i = 0; i < this.chart1.options.series.length; i++) {
+      if (this.chart1.options.series[i].id === this.clicked_company_name) {
+        exists = 1;
+      }
+    }
     if (exists === 0) {
       this.chart.addSerie({
         id: this.clicked_company_name,
-        name: this.clicked_company_name + 'Time series Chart',
+        name: this.clicked_company_name + ' Time series Chart',
         data: arr_data_fig1
       });
+      this.chart1.addSerie({
+        id: this.clicked_company_name,
+        name: this.clicked_company_name + ' Volume Chart',
+        data: arr_data_fig2
+      });
     }
+  }
+
+  turnVolumeOn() {
+    console.log('Volume On');
+    $('.volume-graph').removeAttr('style', 'display: none').attr('style', 'display: block');
+    $('.daily-graph').attr('style', 'display: none');
+  }
+
+  turnDailyOn() {
+    console.log('Daily On');
+    $('.volume-graph').attr('style', 'display: none');
+    $('.daily-graph').removeAttr('style', 'display: none').attr('style', 'display: block');
   }
 
   pass_data_prediction() {
