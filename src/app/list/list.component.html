@@ -7,13 +7,13 @@
 <div>
 <div class="container">
 <div class="row">
-  <div class="col-xs-5 col-sm-5 ">
+  <div class="col-xs-11 col-sm-11">
     <ul class="nav nav-tabs">
       <li role="presentation" class="btn btn-link"><a class= "color" routerLink="/">Home</a></li>
     </ul>
   </div>
 </div>
-<div xmlns="" xmlns="">
+<div>
   <div class="list-group">
     <a class="list-group-item"
        *ngFor="let company_name of company_names; let i = index"
@@ -37,12 +37,12 @@
     Volume
   </button>
 </div>
-<div class="col-sm-11 daily-graph" *ngIf="clicked_company_name">
-  <h4 class= "color">Daily Graph: </h4>
+<div class="daily-graph" *ngIf="clicked_company_name">
+  <h4 class="color alignment">Daily Graph: </h4>
   <div [chart]="chart"></div>
 </div>
-<div class="col-sm-11 volume-graph" *ngIf="clicked_company_name">
-  <h4 class= "color">Volume Graph: </h4>
+<div class="volume-graph" *ngIf="clicked_company_name">
+  <h4 class="color alignment">Volume Graph: </h4>
   <div [chart]="chart1"></div>
 </div>
 <div class="col-sm-11" *ngIf="clicked_company_name">
@@ -55,12 +55,12 @@
       <div class="dropdown" dropdown [dropdownToggle]="false">
         <button class="btn btn-light" dropdown-open>{{prediction_for}}</button>
         <ul class="dropdown-menu">
-          <li><a (click)="prediction_for='Years'">Years</a></li>
-          <li><a (click)="showModal()">Months</a></li>
+          <li><a (click)="prediction_for='Long Term'">Long Term</a></li>
+          <li><a (click)="showModal()">Short Term</a></li>
         </ul>
       </div>
     </div>
-  <div *ngIf="prediction_for == 'Years'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
+  <div *ngIf="prediction_for == 'Long Term'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
     <p class= "color"><b>Years to predict for:</b></p>
     <div class="dropdown" dropdown [dropdownToggle]="false">
       <button class="btn btn-light" dropdown-open>{{noYears}}</button>
@@ -78,7 +78,7 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="prediction_for == 'Months'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
+  <div *ngIf="prediction_for == 'Short Term'" class="col-sm-3" style="margin-bottom: 15%; margin-top: 5%">
     <p class= "color"><b>Months to predict for:</b></p>
     <div class="dropdown" dropdown [dropdownToggle]="false">
       <button class="btn btn-light" dropdown-open>{{noMonths}}</button>
@@ -120,7 +120,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="future-enhancement-goBackButton" data-dismiss="modal">Go Back</button>
-        <button type="button" class="btn btn-danger" id="future-enhancement-continueButton" data-dismiss="modal" (click)="prediction_for='Months'">Continue</button>
+        <button type="button" class="btn btn-danger" id="future-enhancement-continueButton" data-dismiss="modal" (click)="prediction_for='Short Term'">Continue</button>
       </div>
     </div>
   </div>

@@ -7,8 +7,10 @@ import * as d3Shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 import * as d3Axis from 'd3-axis';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 declare var $: any;
 import { Chart } from 'angular-highcharts';
+import {Globals} from '../globals';
 @Component({
   selector: 'app-prediction',
   templateUrl: './prediction.component.html',
@@ -28,7 +30,9 @@ export class PredictionComponent implements OnInit {
   highchart: any;
   sentimentPositives = '';
   sentimentNegatives = '';
-  constructor(private data: ServerService) {}
+  recommendedCompanyName = '';
+  recommendedCompanyValue = 0;
+  constructor(private data: ServerService, private router: Router, private globals: Globals) {}
   ngOnInit() {
     const x_axis_ticks_fig1 = [];
     const y_axis_ticks_fig1 = [];
@@ -66,7 +70,6 @@ export class PredictionComponent implements OnInit {
           monthPredictingFor = moment().format('YYYY') + '-' + this.predictedMonth.toString() + '-01';
           x_axis_ticks_fig1[dataset.data.length] = monthPredictingFor;
         }
-        console.log(monthPredictingFor);
         y_axis_ticks_fig1[dataset.data.length] = this.predictedValue;
 
         for (let i = 0; i < x_axis_ticks_fig1.length; i++) {
@@ -102,7 +105,37 @@ export class PredictionComponent implements OnInit {
           }]
         };
         this.highchart = new Chart(chartOptions);
+        this.globals.predictedSoFar.push({
+          'companyName': this.companyName,
+          'closingValue': this.closingValue,
+          'predictedValue': this.predictedValue
+        });
+        this.recommendedCompany(this.globals.predictedSoFar);
       }
     });
+  }
+
+  recommendedCompany(predictedSoFar) {
+    let max = 0;
+    let index = 0;
+    let maxdiff = 0;
+    for (let i=0; i<predictedSoFar.length; i++) {
+      let diff = predictedSoFar[i].predictedValue - predictedSoFar[i].closingValue;
+      if (diff > maxdiff) {
+        console.log('inside if');
+        max = predictedSoFar[i].predictedValue;
+        maxdiff = diff;
+        index = i;
+      }
+    }
+    this.recommendedCompanyName = predictedSoFar[index].companyName;
+    this.recommendedCompanyValue = maxdiff;
+  }
+
+  removeBehaviourSubject() {
+    let dummyJson = new Object();
+    dummyJson['predictedValue'] = undefined;
+    this.data.changePredictionMessage(dummyJson);
+    this.router.navigate(['/list']);
   }
 }

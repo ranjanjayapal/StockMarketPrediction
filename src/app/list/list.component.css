@@ -145,6 +145,10 @@ h3 {
   color: azure;
 }
 
+.alignment {
+  float: left;
+}
+
 .volume-graph {
   display: none;
 }

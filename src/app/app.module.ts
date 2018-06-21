@@ -14,6 +14,7 @@ import { LoadingModule } from 'ngx-loading';
 import {DropdownModule} from 'ngx-dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { ChartModule } from 'angular-highcharts';
+import { Globals } from './globals';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [ServerService],
+  providers: [ServerService, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
